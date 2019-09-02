@@ -40,7 +40,7 @@ public class RNG
     public int generateNumber(int rangeLimit)
     {
         Random random = new Random();
-        int randomNumber = random.nextInt(rangeLimit + 1);//genarate a number from 1 to rangeLimit
+        int randomNumber = random.nextInt(rangeLimit + 1);//generate a number from 1 to rangeLimit
         return randomNumber;
     }
 }

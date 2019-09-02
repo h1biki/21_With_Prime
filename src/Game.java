@@ -75,7 +75,7 @@ public class Game
             Scanner scanner = new Scanner(System.in);//human choose a tile to play
             chosenTileIndex = scanner.nextInt();
         }while(player.getTiles()[chosenTileIndex - 1].getValue() == player.getLastTilePlayed().getValue());
-        //verifying wheather the tile's value same is as the tile last played
+        //verifying whether the tile's value same is as the tile last played
 
         int tileChosenScore = player.getTiles()[chosenTileIndex - 1].getScore();//choose from the tile[]
         int totalScore = tileChosenScore + player.getScore();//score increment

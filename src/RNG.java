@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Random;
 
 public class RNG
 {
@@ -37,10 +37,10 @@ public class RNG
         minimumValue = newMinimumValue;
     }
 
-    public int generateNumber(int rangeLimit)
+    public int generateNumber(int minimumValue, int maximumValue)
     {
         Random random = new Random();
-        int randomNumber = random.nextInt(rangeLimit + 1);//generate a number from 1 to rangeLimit
+        int randomNumber = minimumValue + random.nextInt(maximumValue);//generate a number from 1 to rangeLimit
         return randomNumber;
     }
 }

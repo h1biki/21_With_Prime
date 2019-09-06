@@ -1,5 +1,4 @@
 
-
 public class Player
 {
     private String name;
@@ -7,26 +6,27 @@ public class Player
     private int roundsWon;
     private Tile tiles[];
     private Tile lastTilePlayed;
-    //private int totalScore;
+
+    // private int totalScore;
     public Player()
     {
         name = "";
         score = 0;
         roundsWon = 0;
         tiles = new Tile[5];
-        lastTilePlayed = new Tile();
-        //totalScore = 0;
+        // totalScore = 0;
     }
-
-    public Player(String newName, int newScore, Tile[] newTiles, Tile newLastTilePlayed, int newRoundsWon, int newTotalScore)
-    {
-        name = newName;
-        score = newScore;
-        tiles = newTiles;
-        lastTilePlayed = newLastTilePlayed;
-        roundsWon = newRoundsWon;
-        //totalScore = newTotalScore;
-    }
+    //
+    // public Player(String newName, int newScore, Tile[] newTiles, Tile
+    // newLastTilePlayed, int newRoundsWon,
+    // int newTotalScore) {
+    // name = newName;
+    // score = newScore;
+    // tiles = newTiles;
+    // lastTilePlayed = newLastTilePlayed;
+    // roundsWon = newRoundsWon;
+    // // totalScore = newTotalScore;
+    // }
 
     public void setTiles(Tile newTiles[])
     {
@@ -43,16 +43,12 @@ public class Player
         return roundsWon;
     }
 
-   /*public int getTotalScore()
-   {
-       return totalScore;
-   }
-
-   public void setTotalScore(int newTotalScore)
-   {
-       totalScore = newTotalScore;
-   }
-   */
+    /*
+     * public int getTotalScore() { return totalScore; }
+     *
+     * public void setTotalScore(int newTotalScore) { totalScore =
+     * newTotalScore; }
+     */
 
     public void setRoundsWon(int newRoundsWon)
     {
@@ -89,7 +85,7 @@ public class Player
         lastTilePlayed = newLastTilePlayed;
     }
 
-    public Tile[] givePlayersTile()
+    public void givePlayersTile()
     {
         Tile tempTiles[] = new Tile[5];
         tempTiles[0] = new Tile(1, 5);
@@ -97,6 +93,38 @@ public class Player
         tempTiles[2] = new Tile(3, 3);
         tempTiles[3] = new Tile(5, 2);
         tempTiles[4] = new Tile(7, 1);
-        return tempTiles;
+        this.tiles = tempTiles;
+    }
+
+    public Tile getTile(int index)
+    {
+        if (index >= tiles.length)
+        {
+            return null;
+        }
+        Tile tile = tiles[index];
+        Tile tempTiles[] = new Tile[tiles.length - 1];
+        int j = 0;
+        for (int i = 0; i < tiles.length; i++)
+        {
+            if (i != index)
+            {
+                tempTiles[j++] = tiles[i];
+            }
+        }
+        this.tiles = tempTiles;
+        return tile;
+    }
+
+    public boolean hasFive()
+    {
+        for (int i = 0; i < tiles.length; i++)
+        {
+            if (tiles[i].getValue() == 5)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

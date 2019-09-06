@@ -1,17 +1,10 @@
 import java.util.Random;
 
-public class RNG
-{
+public class RNG {
     private int maximumValue;
     private int minimumValue;
 
-    public RNG()
-    {
-        int maximumValue = 0;
-        int minimumValue = 0;
-    }
-
-    public RNG(int newMaximumValue, int newMinimumValue)
+    public RNG (int newMinimumValue, int newMaximumValue)
     {
         maximumValue = newMaximumValue;
         minimumValue = newMinimumValue;
@@ -37,10 +30,10 @@ public class RNG
         minimumValue = newMinimumValue;
     }
 
-    public int generateNumber(int minimumValue, int maximumValue)
+    public int generateNumber()
     {
         Random random = new Random();
-        int randomNumber = minimumValue + random.nextInt(maximumValue);//generate a number from 1 to rangeLimit
+        int randomNumber = minimumValue + random.nextInt(maximumValue - minimumValue + 1);
         return randomNumber;
     }
 }

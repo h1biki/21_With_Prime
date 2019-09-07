@@ -11,7 +11,7 @@ public class Game
         while (!option.equals("4"))
         {
             displayMenu();
-            System.out.println("Please Choose Your Option");
+            System.out.println("Please Choose Your Option:");
             Scanner scanner = new Scanner(System.in);
             option = scanner.nextLine().trim();// option 1, 2, 3, 4
 
@@ -39,6 +39,7 @@ public class Game
 
                         for (int i = 0; i < round; i++)
                         {
+                            System.out.println("");
                             System.out.println("Round: " + (i + 1));
                             playersPlaytile(player, computer);
                         }
@@ -179,21 +180,29 @@ public class Game
         if (player.hasFive())
         {
             player.setScore(player.getScore() - 3);
+            System.out.println("Because " + player.getName() + " didn't use 5, deduct 3 points. Now " + player.getName() + " points is " + player.getScore() + " .");
         }
         if (computer.hasFive())
         {
             computer.setScore(computer.getScore() - 3);
+            System.out.println("Because " + computer.getName() + " didn't use 5, deduct 3 points. Now " + computer.getName() + " points is " + computer.getScore() + " .");
         }
+
         if (player.getScore() > computer.getScore())
         {
-            System.out.println(player.getName() + " won the round");
+            System.out.println("");
+            System.out.println(player.getName() + " won the round!");
             player.setRoundsWon(player.getRoundsWon() + 1);
             player.setScore(player.getScore() + 5);
-        } else if (player.getScore() < computer.getScore())
+            System.out.println("Because " + player.getName() + " won the round, bonus 5 points. Now "  + player.getName() + " point is " + player.getScore() + " .");
+        } else
         {
-            System.out.println(computer.getName() + " won the round");
+            System.out.println("");
+            System.out.println(computer.getName() + " won the round!");
             computer.setRoundsWon(computer.getRoundsWon() + 1);
             computer.setScore(computer.getScore() + 5);
+            System.out.println("Because " + computer.getName() + " won the round, bonus 5 points. Now "  + computer.getName() + " point is " + computer.getScore() + " .");
+
         }
     }
 
@@ -208,6 +217,7 @@ public class Game
 
     public void displayMenu()
     {
+        System.out.println("");
         System.out.println("============================================");
         System.out.println("*    Welcome To The 21-With-Prime Game!    *");
         System.out.println("*                                          *");
@@ -217,6 +227,7 @@ public class Game
         System.out.println("*        Press 3 to view help menu         *");
         System.out.println("*             Press 4 to exit              *");
         System.out.println("============================================");
+        System.out.println("");
     }
 
 

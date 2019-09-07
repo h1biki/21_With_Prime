@@ -69,7 +69,8 @@ public class Game
 
     }
 
-    public String nameAssign()// menu 1
+    // menu 1
+    public String nameAssign()
     {
         System.out.println("Please input your name.");
         Scanner scanner = new Scanner(System.in);

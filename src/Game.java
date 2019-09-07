@@ -75,7 +75,7 @@ public class Game
         String userName = scanner.nextLine();
         while (userName.length() > 10 || userName.length() < 3)
         {
-            System.out.println("Your input is invalid, name must contain more than 3 letters and less than 10 letters, please re-input the name.");
+            System.out.println("Your input is invalid, the player's name must contain more than 3 letters and less than 10 letters, please re-input the name.");
             userName = scanner.nextLine().trim();
         }
         System.out.println("Gamer name assignment progress successfully finished.");
@@ -83,7 +83,8 @@ public class Game
         return userName;
     }
 
-    public int computerPlay(Player computer, int gameTotal) {
+    public int computerPlay(Player computer, int gameTotal)
+    {
         int randomlyChoose = 0;
 
         RNG random = new RNG(0, computer.getTiles().length - 1);
@@ -95,7 +96,8 @@ public class Game
 
         computer.setLastTilePlayed(tile);
         gameTotal = gameTotal + tile.getValue();// game total value increment
-        if (gameTotal <= 21) {
+        if (gameTotal <= 21)
+        {
             totalScore += tile.getScore();
             computer.setScore(totalScore);
         }
@@ -105,7 +107,8 @@ public class Game
         return gameTotal;
     }
 
-    public int humanPlay(Player player, int gameTotal) {
+    public int humanPlay(Player player, int gameTotal)
+    {
         int chosenTileIndex = 0;
         for (int i = 0; i < player.getTiles().length; i++)// list human obtained tiles
         {
@@ -124,7 +127,8 @@ public class Game
         int totalScore = player.getScore();
         player.setLastTilePlayed(tile);
         gameTotal += tile.getValue();
-        if (gameTotal <= 21) {
+        if (gameTotal <= 21)
+        {
             totalScore += tile.getScore();
             player.setScore(totalScore);
         }

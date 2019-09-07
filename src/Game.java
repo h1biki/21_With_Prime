@@ -189,14 +189,14 @@ public class Game {
             System.out.println(player.getName() + " has won the round.");
             player.setRoundsWon(player.getRoundsWon() + 1);
             player.setScore(player.getScore() + 5);
-            System.out.println("Because " + player.getName() + " won the round, with 5 points bonus, so " + player.getName() + " score is now" + player.getScore() + ".");
+            System.out.println("Because " + player.getName() + " won the round, with 5 points bonus, so " + player.getName() + " score is now " + player.getScore() + ".");
 
         }else if (player.getScore() < computer.getScore())
         {
             System.out.println(computer.getName() + " has won the round.");
             computer.setRoundsWon(computer.getRoundsWon() + 1);
             computer.setScore(computer.getScore() + 5);
-            System.out.println("Because " + computer.getName() + " won the round, with 5 points bonus, so " + computer.getName() + " score is now" + computer.getScore() + ".");
+            System.out.println("Because " + computer.getName() + " won the round, with 5 points bonus, so " + computer.getName() + " score is now " + computer.getScore() + ".");
         }
     }
 

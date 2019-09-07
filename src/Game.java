@@ -1,21 +1,20 @@
 import java.util.Scanner;
 
 public class Game {
-    public void startGame()
-    {
+    public void startGame() {
         Player player = new Player();
         Player computer = new Player();
         int gameTotal = 0;
         boolean isPlayerRegistered = false;
         String option = "";
-        while (!option.equals("4"))
-        {
+        while (!option.equals("4")) {
             displayMenu();
-            System.out.println("Please Choose Your Option");// human starts to choose an option
+            System.out.println("Please Choose Your Option");
+            // user starts to choose an option
             Scanner scanner = new Scanner(System.in);
             option = scanner.nextLine().trim();// option 1, 2, 3, 4
-            switch (option)
-            {
+
+            switch (option) {
                 case "1":
                     String humanName = nameAssign();
                     player.setName(humanName);
@@ -24,36 +23,33 @@ public class Game {
                     break;
 
                 case "2":
-                    if (isPlayerRegistered == true)
-                    {
+                    if (isPlayerRegistered) {
                         System.out.println("Please Enter The Round Number You Want To Play");
                         int round = scanner.nextInt();
                         scanner.nextLine();
-        					/*now validating the human input, when incorrect then ask to
-        					re-input round times*/
-                        while (round > 10 || round < 0)
-                        {
+                        // validating the human input, when incorrect then ask to
+                        // re-input round times
+                        while (round > 10 || round < 0) {
                             System.out.println("Please input a valid round number.");
                             round = scanner.nextInt();
                             scanner.nextLine();
                         }
 
-                        for (int i = 0; i < round; i++)
-                        {
+                        for (int i = 0; i < round; i++) {
                             System.out.println("Round: " + (i + 1));
                             playersPlaytile(player, computer);
                         }
                         judgeWinner(player, computer);
                         isPlayerRegistered = false;
 
-                    } else
-                    {
+                    } else {
                         System.out.println("Please enter your name before start the game...");
                     }
                     break;
 
                 case "3":
                     help();
+                    // startGame();
                     break;
 
                 case "4":
@@ -66,6 +62,7 @@ public class Game {
                     break;
             }
         }
+
     }
 
     public String nameAssign()// menu 1
@@ -73,9 +70,9 @@ public class Game {
         System.out.println("Please input your name.");
         Scanner scanner = new Scanner(System.in);// user is typing....
         String userName = scanner.nextLine();
-        // validating the human input, when incorrect then ask to re-input the user's name
-        while (userName.length() > 10 || userName.length() < 3)
-        {
+        // validating the human input, when incorrect then ask to re-input the
+        // user's name
+        while (userName.length() > 10 || userName.length() < 3) {
             System.out.println("Your input is incorrect, please re-input the name.");
             userName = scanner.nextLine().trim();
         }
@@ -84,61 +81,74 @@ public class Game {
         return userName;
     }
 
-    public int computerPlay(Player computer, int gameTotal)
-    {
+    public int computerPlay(Player computer, int gameTotal) {
         int randomlyChoose = 0;
+
         RNG random = new RNG(0, computer.getTiles().length - 1);
         randomlyChoose = random.generateNumber();// randomly generate
-
+        // verifying whether the tile's value is same as the tile last played
+        // while (computer.getTiles()[randomlyChoose].getValue() !=
+        // computer.getLastTilePlayed().getValue()) {
+        // // randomlyChoose = random.generateNumber();// randomly generate
+        // random = new RNG(0, computer.getTiles().length - 1);
+        // randomlyChoose = random.generateNumber();// randomly generate
+        // }
         Tile tile = computer.getTile(randomlyChoose);
 
-
+        // int tileChooseValue = computer.getTiles()[randomlyChoose].getValue();
+        // int tileChosenScore = computer.getTiles()[randomlyChoose].getScore();
         int totalScore = computer.getScore();
-        if (gameTotal <= 21)
-        {
-            totalScore = tile.getScore() + totalScore;
+        // increment
+        // assign last tile played
+        computer.setLastTilePlayed(tile);
+        gameTotal = gameTotal + tile.getValue();// game total value increment
+        if (gameTotal <= 21) {
+            totalScore += tile.getScore();
             computer.setScore(totalScore);
         }
-        computer.setLastTilePlayed(tile);
-        gameTotal = gameTotal + tile.getValue();
 
         System.out.println("Computer plays tile " + computer.getLastTilePlayed().getValue() + ". Game total is now "
                 + gameTotal + ". Computer score is " + totalScore + ".");
         return gameTotal;
     }
 
-    public int humanPlay(Player player, int gameTotal)
-    {
+    public int humanPlay(Player player, int gameTotal) {
         int chosenTileIndex = 0;
-        for (int i = 0; i < player.getTiles().length; i++)// list human obtained tiles
+        for (int i = 0; i < player.getTiles().length; i++)// list human obtained
+        // tiles
         {
             int value = player.getTiles()[i].getValue();
             int score = player.getTiles()[i].getScore();
             int order = i + 1;
             System.out.println(order + "---" + "Tile value:" + value + "   Tile score:" + score);
         }
-        System.out.println("Select your tile to play:");
+        System.out.println("Select your tile to play");
         Scanner scanner = new Scanner(System.in);// human choose a tile to play
         chosenTileIndex = scanner.nextInt();
         scanner.nextLine();
 
+        // choose from the tile[]
         Tile tile = player.getTile(chosenTileIndex - 1);
+
         int totalScore = player.getScore();
-        if (gameTotal <= 21)
-        {
-            totalScore = tile.getScore() + totalScore;
+        // score increment assign last tile played
+        player.setLastTilePlayed(tile);
+        // game total value increment
+        gameTotal += tile.getValue();
+        if (gameTotal <= 21) {
+            totalScore += tile.getScore();
             player.setScore(totalScore);
         }
-        player.setLastTilePlayed(tile);
-        gameTotal = tile.getScore() + gameTotal;
+
         System.out.println(player.getName() + " plays tile " + player.getLastTilePlayed().getValue()
                 + ". Game total is now " + gameTotal + ". " + player.getName() + " score is " + totalScore + ".");
         return gameTotal;
     }
 
-    public void playersPlaytile(Player player, Player computer)// menu 2
-    {
-        RNG rng = new RNG(0, 1); //0 / 1
+    // menu 2
+    public void playersPlaytile(Player player, Player computer) {
+        RNG rng = new RNG(0, 1);
+        // randomly choose the first one 01234
         int randomNumber = rng.generateNumber();
         int gameTotal = 0;
         computer.setScore(0);
@@ -146,70 +156,53 @@ public class Game {
         computer.givePlayersTile();
         player.givePlayersTile();
 
-        if (randomNumber == 0)
-        {
+        if (randomNumber == 0) {
             System.out.println(player.getName() + " is the first one who start the game");
-            do
-            {
+            do {
                 // human start first
                 gameTotal = humanPlay(player, gameTotal);
-                if (gameTotal >= 21)
-                {
+                if (gameTotal >= 21) {
                     break;
                 }
                 gameTotal = computerPlay(computer, gameTotal);
-            }while (gameTotal < 21);
-        }else
-        {
+            } while (gameTotal < 21);
+        } else {
             System.out.println(computer.getName() + " is the first one who start the game");
-            do
-            {
+            do {
                 // computer start first
                 gameTotal = computerPlay(computer, gameTotal);
-                if (gameTotal >= 21)
-                {
+                if (gameTotal >= 21) {
                     break;
                 }
                 gameTotal = humanPlay(player, gameTotal);
-            }while (gameTotal < 21);
+            } while (gameTotal < 21);
         }
-
-        if (player.hasFive())
-        {
+        if (player.hasFive()) {
             player.setScore(player.getScore() - 3);
         }
-
-        if (computer.hasFive())
-        {
+        if (computer.hasFive()) {
             computer.setScore(computer.getScore() - 3);
         }
-
-        if (player.getScore() > computer.getScore())
-        {
-            System.out.println(player.getName() + " has won the round.");
+        if (player.getScore() > computer.getScore()) {
+            System.out.println(player.getName() + " won the round");
             player.setRoundsWon(player.getRoundsWon() + 1);
             player.setScore(player.getScore() + 5);
-            System.out.println("Because " + player.getName() + " won the round, with 5 points bonus, so " + player.getName() + " score is now " + player.getScore() + ".");
-
-        }else if (player.getScore() < computer.getScore())
-        {
-            System.out.println(computer.getName() + " has won the round.");
+        } else if (player.getScore() < computer.getScore()) {
+            System.out.println(computer.getName() + " won the round");
             computer.setRoundsWon(computer.getRoundsWon() + 1);
             computer.setScore(computer.getScore() + 5);
-            System.out.println("Because " + computer.getName() + " won the round, with 5 points bonus, so " + computer.getName() + " score is now " + computer.getScore() + ".");
         }
     }
 
-    public void help()// menu 3
-    {
-        System.out.println("option 1 is to register a new name for a new gamer");
-        System.out.println("option 2 is to start playing tiles between you and the computer");
-        System.out.println("option 3 is to display the help menu");
-        System.out.println("option 4 is to exit the game");
+    // menu 3
+    public void help() {
+        System.out.println("option 1 is used to register a new name for a new gamer");
+        System.out.println("option 2 is used to start playing tiles between you and the computer");
+        System.out.println("option 3 is used to display the help menu");
+        System.out.println("option 4 is used to exit the game");
     }
 
-    public void displayMenu()
-    {
+    public void displayMenu() {
         System.out.println("============================================");
         System.out.println("*    Welcome To The 21-With-Prime Game!    *");
         System.out.println("*                                          *");
@@ -221,17 +214,26 @@ public class Game {
         System.out.println("============================================");
     }
 
-    public void judgeWinner(Player player, Player computer)
-    {
-        if (player.getRoundsWon() < computer.getRoundsWon())
-        {
+    /*
+     * public void hasFive() { totalScore = totalScore - 3; }
+     *
+     * public void winnerBonus() { totalScore = totalScore + 5; }
+     */
+
+    public void judgeWinner(Player player, Player computer) {
+        if (player.getRoundsWon() < computer.getRoundsWon()) {
             System.out.println("Game over! Computer win! better next time...");
-        }else if (player.getRoundsWon() > computer.getRoundsWon())
-        {
+        } else if (player.getRoundsWon() > computer.getRoundsWon()) {
             System.out.println("Congratulations! you win!!");
-        }else
-        {
+        } else {
             System.out.println("OMG is a tie!!!");
         }
     }
+
+    /*
+     * public int getTotalScore() { return totalScore; }
+     */
 }
+/*
+ * WIP: int totalScore, round times and win-lose rules and score rules
+ */

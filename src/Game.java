@@ -1,16 +1,17 @@
 import java.util.Scanner;
 
-public class Game {
-    public void startGame() {
+public class Game
+{
+    public void startGame()
+    {
         Player player = new Player();
         Player computer = new Player();
-        int gameTotal = 0;
         boolean isPlayerRegistered = false;
         String option = "";
-        while (!option.equals("4")) {
+        while (!option.equals("4"))
+        {
             displayMenu();
             System.out.println("Please Choose Your Option");
-            // user starts to choose an option
             Scanner scanner = new Scanner(System.in);
             option = scanner.nextLine().trim();// option 1, 2, 3, 4
 
@@ -23,33 +24,35 @@ public class Game {
                     break;
 
                 case "2":
-                    if (isPlayerRegistered) {
-                        System.out.println("Please Enter The Round Number You Want To Play");
-                        int round = scanner.nextInt();
-                        scanner.nextLine();
-                        // validating the human input, when incorrect then ask to
-                        // re-input round times
-                        while (round > 10 || round < 0) {
+                    if (isPlayerRegistered)
+                    {
+                            System.out.println("Please Enter The Round Number You Want To Play");
+                            int round = scanner.nextInt();
+                            scanner.nextLine();
+
+                        while (round > 10 || round < 0)
+                        {
                             System.out.println("Please input a valid round number.");
                             round = scanner.nextInt();
                             scanner.nextLine();
                         }
 
-                        for (int i = 0; i < round; i++) {
+                        for (int i = 0; i < round; i++)
+                        {
                             System.out.println("Round: " + (i + 1));
                             playersPlaytile(player, computer);
                         }
-                        judgeWinner(player, computer);
-                        isPlayerRegistered = false;
+                            judgeWinner(player, computer);
+                            isPlayerRegistered = false;
 
-                    } else {
-                        System.out.println("Please enter your name before start the game...");
-                    }
+                    }else
+                        {
+                            System.out.println("Please enter your name before start the game...");
+                        }
                     break;
 
                 case "3":
                     help();
-                    // startGame();
                     break;
 
                 case "4":
@@ -68,10 +71,8 @@ public class Game {
     public String nameAssign()// menu 1
     {
         System.out.println("Please input your name.");
-        Scanner scanner = new Scanner(System.in);// user is typing....
+        Scanner scanner = new Scanner(System.in);
         String userName = scanner.nextLine();
-        // validating the human input, when incorrect then ask to re-input the
-        // user's name
         while (userName.length() > 10 || userName.length() < 3) {
             System.out.println("Your input is incorrect, please re-input the name.");
             userName = scanner.nextLine().trim();
@@ -86,20 +87,11 @@ public class Game {
 
         RNG random = new RNG(0, computer.getTiles().length - 1);
         randomlyChoose = random.generateNumber();// randomly generate
-        // verifying whether the tile's value is same as the tile last played
-        // while (computer.getTiles()[randomlyChoose].getValue() !=
-        // computer.getLastTilePlayed().getValue()) {
-        // // randomlyChoose = random.generateNumber();// randomly generate
-        // random = new RNG(0, computer.getTiles().length - 1);
-        // randomlyChoose = random.generateNumber();// randomly generate
-        // }
+
         Tile tile = computer.getTile(randomlyChoose);
 
-        // int tileChooseValue = computer.getTiles()[randomlyChoose].getValue();
-        // int tileChosenScore = computer.getTiles()[randomlyChoose].getScore();
         int totalScore = computer.getScore();
-        // increment
-        // assign last tile played
+
         computer.setLastTilePlayed(tile);
         gameTotal = gameTotal + tile.getValue();// game total value increment
         if (gameTotal <= 21) {
@@ -114,8 +106,7 @@ public class Game {
 
     public int humanPlay(Player player, int gameTotal) {
         int chosenTileIndex = 0;
-        for (int i = 0; i < player.getTiles().length; i++)// list human obtained
-        // tiles
+        for (int i = 0; i < player.getTiles().length; i++)// list human obtained tiles
         {
             int value = player.getTiles()[i].getValue();
             int score = player.getTiles()[i].getScore();
@@ -127,13 +118,10 @@ public class Game {
         chosenTileIndex = scanner.nextInt();
         scanner.nextLine();
 
-        // choose from the tile[]
         Tile tile = player.getTile(chosenTileIndex - 1);
 
         int totalScore = player.getScore();
-        // score increment assign last tile played
         player.setLastTilePlayed(tile);
-        // game total value increment
         gameTotal += tile.getValue();
         if (gameTotal <= 21) {
             totalScore += tile.getScore();
@@ -214,11 +202,6 @@ public class Game {
         System.out.println("============================================");
     }
 
-    /*
-     * public void hasFive() { totalScore = totalScore - 3; }
-     *
-     * public void winnerBonus() { totalScore = totalScore + 5; }
-     */
 
     public void judgeWinner(Player player, Player computer) {
         if (player.getRoundsWon() < computer.getRoundsWon()) {
@@ -229,11 +212,4 @@ public class Game {
             System.out.println("OMG is a tie!!!");
         }
     }
-
-    /*
-     * public int getTotalScore() { return totalScore; }
-     */
 }
-/*
- * WIP: int totalScore, round times and win-lose rules and score rules
- */

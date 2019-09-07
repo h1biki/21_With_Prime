@@ -200,10 +200,10 @@ public class Game
     // menu 3
     public void help()
     {
-        System.out.println("option 1 is used to register a new name for a new gamer");
-        System.out.println("option 2 is used to start playing tiles between you and the computer");
-        System.out.println("option 3 is used to display the help menu");
-        System.out.println("option 4 is used to exit the game");
+        System.out.println("option 1 is to register a new name for a new gamer");
+        System.out.println("option 2 is to start playing tiles between you and the computer");
+        System.out.println("option 3 is to display the help menu");
+        System.out.println("option 4 is to exit the game");
     }
 
     public void displayMenu()

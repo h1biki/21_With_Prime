@@ -73,8 +73,9 @@ public class Game
         System.out.println("Please input your name.");
         Scanner scanner = new Scanner(System.in);
         String userName = scanner.nextLine();
-        while (userName.length() > 10 || userName.length() < 3) {
-            System.out.println("Your input is incorrect, please re-input the name.");
+        while (userName.length() > 10 || userName.length() < 3)
+        {
+            System.out.println("Your input is invalid, name must contain more than 3 letters and less than 10 letters, please re-input the name.");
             userName = scanner.nextLine().trim();
         }
         System.out.println("Gamer name assignment progress successfully finished.");

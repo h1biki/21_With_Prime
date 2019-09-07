@@ -105,6 +105,7 @@ public class Game
 
         System.out.println("Computer plays tile " + computer.getLastTilePlayed().getValue() + ". Game total is now "
                 + gameTotal + ". Computer score is " + totalScore + ".");
+        System.out.println("");
         return gameTotal;
     }
 
@@ -136,6 +137,7 @@ public class Game
 
         System.out.println(player.getName() + " plays tile " + player.getLastTilePlayed().getValue()
                 + ". Game total is now " + gameTotal + ". " + player.getName() + " score is " + totalScore + ".");
+        System.out.println("");
         return gameTotal;
     }
 

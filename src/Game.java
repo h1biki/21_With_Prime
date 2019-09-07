@@ -155,6 +155,7 @@ public class Game
         if (randomNumber == 0)
         {
             System.out.println(player.getName() + " is the first one who start the game");
+            System.out.println("");
             do
             {
                 // human start first
@@ -168,6 +169,7 @@ public class Game
         } else
         {
             System.out.println(computer.getName() + " is the first one who start the game");
+            System.out.println("");
             do
             {
                     // computer start first

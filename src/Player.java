@@ -16,17 +16,6 @@ public class Player
         tiles = new Tile[5];
         // totalScore = 0;
     }
-    //
-    // public Player(String newName, int newScore, Tile[] newTiles, Tile
-    // newLastTilePlayed, int newRoundsWon,
-    // int newTotalScore) {
-    // name = newName;
-    // score = newScore;
-    // tiles = newTiles;
-    // lastTilePlayed = newLastTilePlayed;
-    // roundsWon = newRoundsWon;
-    // // totalScore = newTotalScore;
-    // }
 
     public void setTiles(Tile newTiles[])
     {
@@ -42,13 +31,6 @@ public class Player
     {
         return roundsWon;
     }
-
-    /*
-     * public int getTotalScore() { return totalScore; }
-     *
-     * public void setTotalScore(int newTotalScore) { totalScore =
-     * newTotalScore; }
-     */
 
     public void setRoundsWon(int newRoundsWon)
     {

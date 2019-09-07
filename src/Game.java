@@ -87,7 +87,6 @@ public class Game {
     public int computerPlay(Player computer, int gameTotal)
     {
         int randomlyChoose = 0;
-
         RNG random = new RNG(0, computer.getTiles().length - 1);
         randomlyChoose = random.generateNumber();// randomly generate
 
@@ -97,13 +96,11 @@ public class Game {
         int totalScore = computer.getScore();
         if (gameTotal <= 21)
         {
-            totalScore += tile.getScore();
+            totalScore = tile.getScore() + totalScore;
             computer.setScore(totalScore);
         }
-        // increment
-        // assign last tile played
         computer.setLastTilePlayed(tile);
-        gameTotal = gameTotal + tile.getValue();// game total value increment
+        gameTotal = gameTotal + tile.getValue();
 
         System.out.println("Computer plays tile " + computer.getLastTilePlayed().getValue() + ". Game total is now "
                 + gameTotal + ". Computer score is " + totalScore + ".");
@@ -120,21 +117,20 @@ public class Game {
             int order = i + 1;
             System.out.println(order + "---" + "Tile value:" + value + "   Tile score:" + score);
         }
-        System.out.println("Select your tile to play");
+        System.out.println("Select your tile to play:");
         Scanner scanner = new Scanner(System.in);// human choose a tile to play
         chosenTileIndex = scanner.nextInt();
-        scanner.nextLine();// choose from the tile[]
+        scanner.nextLine();
+
         Tile tile = player.getTile(chosenTileIndex - 1);
         int totalScore = player.getScore();
         if (gameTotal <= 21)
         {
-            totalScore += tile.getScore();
+            totalScore = tile.getScore() + totalScore;
             player.setScore(totalScore);
         }
-        // score increment assign last tile played
         player.setLastTilePlayed(tile);
-        // game total value increment
-        gameTotal += tile.getScore();
+        gameTotal = tile.getScore() + gameTotal;
         System.out.println(player.getName() + " plays tile " + player.getLastTilePlayed().getValue()
                 + ". Game total is now " + gameTotal + ". " + player.getName() + " score is " + totalScore + ".");
         return gameTotal;
@@ -149,13 +145,16 @@ public class Game {
         player.setScore(0);
         computer.givePlayersTile();
         player.givePlayersTile();
+
         if (randomNumber == 0)
         {
             System.out.println(player.getName() + " is the first one who start the game");
-            do {
+            do
+            {
                 // human start first
                 gameTotal = humanPlay(player, gameTotal);
-                if (gameTotal >= 21) {
+                if (gameTotal >= 21)
+                {
                     break;
                 }
                 gameTotal = computerPlay(computer, gameTotal);
@@ -187,23 +186,26 @@ public class Game {
 
         if (player.getScore() > computer.getScore())
         {
-            System.out.println(player.getName() + " won the round");
+            System.out.println(player.getName() + " has won the round.");
             player.setRoundsWon(player.getRoundsWon() + 1);
             player.setScore(player.getScore() + 5);
+            System.out.println("Because " + player.getName() + " won the round, with 5 points bonus, so " + player.getName() + " score is now" + player.getScore() + ".");
+
         }else if (player.getScore() < computer.getScore())
         {
-            System.out.println(computer.getName() + " won the round");
+            System.out.println(computer.getName() + " has won the round.");
             computer.setRoundsWon(computer.getRoundsWon() + 1);
             computer.setScore(computer.getScore() + 5);
+            System.out.println("Because " + computer.getName() + " won the round, with 5 points bonus, so " + computer.getName() + " score is now" + computer.getScore() + ".");
         }
     }
 
     public void help()// menu 3
     {
-        System.out.println("option 1 is used to register a new name for a new gamer");
-        System.out.println("option 2 is used to start playing tiles between you and the computer");
-        System.out.println("option 3 is used to display the help menu");
-        System.out.println("option 4 is used to exit the game");
+        System.out.println("option 1 is to register a new name for a new gamer");
+        System.out.println("option 2 is to start playing tiles between you and the computer");
+        System.out.println("option 3 is to display the help menu");
+        System.out.println("option 4 is to exit the game");
     }
 
     public void displayMenu()
@@ -232,6 +234,4 @@ public class Game {
             System.out.println("OMG is a tie!!!");
         }
     }
-
-
 }

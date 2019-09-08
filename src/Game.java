@@ -123,7 +123,6 @@ public class Game
         System.out.println("Select your tile to play");
         Scanner scanner = new Scanner(System.in);// human choose a tile to play
         chosenTileIndex = scanner.nextInt();
-        scanner.nextLine();
 
         Tile tile = player.getTile(chosenTileIndex - 1);
 

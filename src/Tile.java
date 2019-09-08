@@ -1,26 +1,32 @@
 
-public class Tile {
+public class Tile
+{
     private int value;
     private int score;
 
-    public Tile(int newValue, int newScore) {
+    public Tile(int newValue, int newScore)
+    {
         value = newValue;
         score = newScore;
     }
 
-    public int getScore() {
+    public int getScore()
+    {
         return score;
     }
 
-    public int getValue() {
+    public int getValue()
+    {
         return value;
     }
 
-    public void setScore(int newScore) {
+    public void setScore(int newScore)
+    {
         score = newScore;
     }
 
-    public void setValue(int newValue) {
+    public void setValue(int newValue)
+    {
         value = newValue;
     }
 

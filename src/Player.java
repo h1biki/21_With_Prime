@@ -14,7 +14,6 @@ public class Player
         score = 0;
         roundsWon = 0;
         tiles = new Tile[5];
-        // totalScore = 0;
     }
 
     public void setTiles(Tile newTiles[])

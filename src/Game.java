@@ -199,7 +199,7 @@ public class Game
             player.setRoundsWon(player.getRoundsWon() + 1);
             player.setScore(player.getScore() + 5);
             System.out.println("Because " + player.getName() + " won the round, bonus 5 points. Now "  + player.getName() + " point is " + player.getScore() + " .");
-        } else
+        } else if(player.getScore() < computer.getScore())
         {
             System.out.println("");
             System.out.println(computer.getName() + " won the round!");
@@ -207,8 +207,12 @@ public class Game
             computer.setScore(computer.getScore() + 5);
             System.out.println("Because " + computer.getName() + " won the round, bonus 5 points. Now "  + computer.getName() + " point is " + computer.getScore() + " .");
 
+        } else
+        {
+                System.out.println("It's a tie round!");
         }
     }
+
 
     // menu 3
     public void help()

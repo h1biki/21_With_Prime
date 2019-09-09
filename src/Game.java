@@ -92,7 +92,9 @@ public class Game
         RNG random = new RNG(0, computer.getTiles().length - 1);
         randomlyChoose = random.generateNumber();// randomly generate
 
+
         Tile tile = computer.getTile(randomlyChoose);
+
 
         int totalScore = computer.getScore();
 
@@ -160,6 +162,7 @@ public class Game
             {
                 // human start first
                 gameTotal = humanPlay(player, gameTotal);
+
                 if (gameTotal >= 21)
                 {
                     break;
@@ -174,6 +177,7 @@ public class Game
             {
                     // computer start first
                     gameTotal = computerPlay(computer, gameTotal);
+
                     if (gameTotal >= 21)
                     {
                         break;

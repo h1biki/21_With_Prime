@@ -74,7 +74,7 @@ public class Player
         tempTiles[2] = new Tile(3, 3);
         tempTiles[3] = new Tile(5, 2);
         tempTiles[4] = new Tile(7, 1);
-        this.tiles = tempTiles;
+        tiles = tempTiles;
     }
 
     public Tile getTile(int index)
@@ -93,7 +93,7 @@ public class Player
                 tempTiles[j++] = tiles[i];
             }
         }
-        this.tiles = tempTiles;
+        tiles = tempTiles;
         return tile;
     }
 

@@ -1,16 +1,16 @@
+import java.util.Random;
 /**
  * class RNG is the random number generator
  *
  * @author (Zixi Zhao)
- * @version (10-9-2019)
+ * @version (14-9-2019)
  */
-
-import java.util.Random;
 
 public class RNG
 {
-    private int maximumValue;
-    private int minimumValue;
+    private int maximumValue;//the maximum bound of generate number
+    private int minimumValue;//the minimum bound of generate number
+
     /**
      * Default constructor for objects of class RNG
      */
@@ -27,6 +27,18 @@ public class RNG
     {
         maximumValue = newMaximumValue;
         minimumValue = newMinimumValue;
+    }
+
+    /**
+     * To genarate an integer random number, inclusive range from minimumValue to maximumValue
+     *
+     * @return    an integer random number
+     */
+    public int generateNumber()
+    {
+        Random random = new Random();//create a Random() object
+        int randomNumber = minimumValue + random.nextInt(maximumValue - minimumValue + 1);
+        return randomNumber;
     }
 
     /**
@@ -52,7 +64,7 @@ public class RNG
     /**
      * Mutator of maximumValue
      *
-     * @param  int newMaximumValue
+     * @param  newMaximumValue  the new value of maximumValue
      * @return    void
      */
     public void setMaximumValue(int newMaximumValue)
@@ -63,23 +75,11 @@ public class RNG
     /**
      * Mutator of minimumValue
      *
-     * @param  int newMinimumValue
+     * @param  int newMinimumValue  the new value of minimumValue
      * @return    void
      */
     public void setMinimumValue(int newMinimumValue)
     {
         minimumValue = newMinimumValue;
-    }
-
-    /**
-     * To genarate a random number, inclusive range from minimumValue to maximumValue
-     *
-     * @return    an integer random number
-     */
-    public int generateNumber()
-    {
-        Random random = new Random();
-        int randomNumber = minimumValue + random.nextInt(maximumValue - minimumValue + 1);
-        return randomNumber;
     }
 }

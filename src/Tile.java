@@ -2,13 +2,13 @@
  * class Tile is the tiles which players played, with attributes value and score
  *
  * @author (Zixi Zhao)
- * @version (10-9-2019)
+ * @version (14-9-2019)
  */
-
 public class Tile
 {
-    private int value;
-    private int score;
+    private int value;//the value of a tile
+    private int score;//the score of a tile
+
     /**
      * Default constructor for objects of class Tile
      */
@@ -50,7 +50,7 @@ public class Tile
     /**
      * Mutator of score
      *
-     * @param  int newScore
+     * @param  newScore the new value of score
      * @return    void
      */
     public void setScore(int newScore)
@@ -61,12 +61,11 @@ public class Tile
     /**
      * Mutator of value
      *
-     * @param  int newValue
+     * @param  newValue the new value of score
      * @return    void
      */
     public void setValue(int newValue)
     {
         value = newValue;
     }
-
 }

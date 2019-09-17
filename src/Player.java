@@ -2,16 +2,16 @@
  * class Player is the players include human and computer
  *
  * @author (Zixi Zhao)
- * @version (10-9-2019)
+ * @version (14-9-2019)
  */
-
 public class Player
 {
-    private String name;
-    private int score;
-    private int roundsWon;
-    private Tile tiles[];
-    private Tile lastTilePlayed;
+    private String name;//a player's name
+    private int score;//a player's round score
+    private int roundsWon;//a player's won round times
+    private Tile tiles[];//array for keeping player's tiles
+    private Tile lastTilePlayed;//the tile which a player just played
+
     /**
      * Default constructor for objects of class Player
      */
@@ -35,45 +35,13 @@ public class Player
     }
 
     /**
-     * Mutator of tiles
+     * Accessor of lastTilePlayed
      *
-     * @param  Tile newTiles[]
-     * @return    void
+     * @return    lastTilePlayed
      */
-    public void setTiles(Tile newTiles[])
+    public Tile getLastTilePlayed()
     {
-        tiles = newTiles;
-    }
-
-    /**
-     * Accessor of tiles
-     *
-     * @return    tiles
-     */
-    public Tile[] getTiles()
-    {
-        return tiles;
-    }
-
-    /**
-     * Accessor of roundsWon
-     *
-     * @return    roundsWon
-     */
-    public int getRoundsWon()
-    {
-        return roundsWon;
-    }
-
-    /**
-     * Mutator of roundsWon
-     *
-     * @param  int newRoundsWon
-     * @return    void
-     */
-    public void setRoundsWon(int newRoundsWon)
-    {
-        roundsWon = newRoundsWon;
+        return lastTilePlayed;
     }
 
     /**
@@ -87,14 +55,13 @@ public class Player
     }
 
     /**
-     * Mutator of name
+     * Accessor of roundsWon
      *
-     * @param  String newName
-     * @return    void
+     * @return    roundsWon
      */
-    public void setName(String newName)
+    public int getRoundsWon()
     {
-        name = newName;
+        return roundsWon;
     }
 
     /**
@@ -108,35 +75,13 @@ public class Player
     }
 
     /**
-     * Mutator of score
+     * Accessor of tiles
      *
-     * @param  int newScore
-     * @return    void
+     * @return    tiles
      */
-    public void setScore(int newScore)
+    public Tile[] getTiles()
     {
-        score = newScore;
-    }
-
-    /**
-     * Accessor of lastTilePlayed
-     *
-     * @return    lastTilePlayed
-     */
-    public Tile getLastTilePlayed()
-    {
-        return lastTilePlayed;
-    }
-
-    /**
-     * Mutator of lastTilePlayed
-     *
-     * @param  Tile newLastTilePlayed
-     * @return    void
-     */
-    public void setLastTilePlayed(Tile newLastTilePlayed)
-    {
-        lastTilePlayed = newLastTilePlayed;
+        return tiles;
     }
 
     /**
@@ -156,38 +101,6 @@ public class Player
     }
 
     /**
-     * Has two functions:
-     *
-     * Function 1: When a player played a tile, create a new tiles[]
-     * which exclude this tile and replace the original tiles[].
-     *
-     *
-     * Function 2: Return the tile which a player just played
-     *
-     * @param  int index
-     * @return    tile
-     */
-    public Tile getTile(int index)
-    {
-        if (index >= tiles.length)
-        {
-            return null;
-        }
-        Tile tile = tiles[index];
-        Tile tempTiles[] = new Tile[tiles.length - 1];
-        int j = 0;
-        for (int i = 0; i < tiles.length; i++)
-        {
-            if (i != index)
-            {
-                tempTiles[j++] = tiles[i];
-            }
-        }
-        tiles = tempTiles;
-        return tile;
-    }
-
-    /**
      *  To check whether a player have tile value equals 5 last at the finish of a round,
      *  if have then return true, if not, return false
      *
@@ -197,11 +110,88 @@ public class Player
     {
         for (int i = 0; i < tiles.length; i++)
         {
-            if (tiles[i].getValue() == 5)
+            if (tiles[i].getValue() == 5)//traversing tiles[], if found tile's value is 5 then return true
             {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Mutator of lastTilePlayed
+     *
+     * @param  newLastTilePlayed    the new value of lastTilePlayed
+     * @return    void
+     */
+    public void setLastTilePlayed(Tile newLastTilePlayed)
+    {
+        lastTilePlayed = newLastTilePlayed;
+    }
+
+    /**
+     * Mutator of name
+     *
+     * @param  newName  the new value of name
+     * @return    void
+     */
+    public void setName(String newName)
+    {
+        name = newName;
+    }
+
+    /**
+     * Mutator of roundsWon
+     *
+     * @param  int newRoundsWon
+     * @return    void
+     */
+    public void setRoundsWon(int newRoundsWon)
+    {
+        roundsWon = newRoundsWon;
+    }
+
+    /**
+     * Mutator of score
+     *
+     * @param  newScore the new value of score
+     * @return    void
+     */
+    public void setScore(int newScore)
+    {
+        score = newScore;
+    }
+
+    /**
+     * Mutator of tiles
+     *
+     * @param  Tile newTiles[]
+     * @return    void
+     */
+    public void setTiles(Tile newTiles[])
+    {
+        tiles = newTiles;
+    }
+
+    /**
+     * When a player played a tile, create a new array
+     * which exclude this tile and replace the original tiles[].
+     *
+     * @param  index   A element's index in tiles[]
+     * @return    the tile a player just played
+     */
+    public void tileArrayReplacement(int index)
+    {
+        Tile tile = tiles[index];//get the tile just played
+        Tile tempTiles[] = new Tile[tiles.length - 1];//create new array, ready for insert tiles haven't be used
+        int j = 0;
+        for (int i = 0; i < tiles.length; i++)//traversing original tiles[]
+        {
+            if (i != index)
+            {
+                tempTiles[j++] = tiles[i];//insert the tiles haven't be used to the new array
+            }
+        }
+        tiles = tempTiles;
     }
 }
